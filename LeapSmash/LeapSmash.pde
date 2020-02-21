@@ -8,8 +8,13 @@ void setup(){
   myPort = new Serial(this,portName, 9600);
   leap = new LeapMotion(this);
   //fullScreen();
+<<<<<<< HEAD
+  println(Serial.list());
+  size(800,600);
+=======
  // println(Serial.list());
   size(1000,1000);
+>>>>>>> 5e7b54a3277e9719ca5e7ddb9b509ddfe9cf4424
 }
 int isRight = 108/2, //54
 isFist = isRight/3, //18
