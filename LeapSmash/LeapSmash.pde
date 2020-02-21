@@ -4,8 +4,11 @@ LeapMotion leap;
 Serial myPort;
 
 void setup(){
+  String portName = Serial.list()[0];
+  myPort = new Serial(this,portName, 9600);
   leap = new LeapMotion(this);
   fullScreen();
+  println(Serial.list());
   //size(800,600);
 }
 int isRight = 108/2, //54
@@ -60,5 +63,5 @@ void draw() {
   }
 }
 void sendData(int data) {
-  myport.write();
+  myPort.write(data);
 }
