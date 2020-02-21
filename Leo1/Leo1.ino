@@ -12,7 +12,7 @@ void setup() {
    XInput.begin();
 }
 void loop() {
-  delay(80);
+  delay(8);
 }
 void receiveEvent(int howMany){
   while(1 <= Wire.available()) // loop through all but the last
