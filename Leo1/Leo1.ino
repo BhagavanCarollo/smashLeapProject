@@ -7,7 +7,7 @@ int flat = 0, fist = 1, sideThumb = 2;
 void setup() {
   Wire.begin(4);                // join i2c bus with address #4
   Wire.onReceive(receiveEvent);
-  Serial.begin(9600);           // start serial for output
+  Serial.begin(9600);  // start serial for output
    pinMode(LED_BUILTIN, OUTPUT);
    XInput.begin();
 }
