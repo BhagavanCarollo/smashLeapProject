@@ -3,6 +3,7 @@
 #include <Wire.h>
 byte x;
 char val;
+//this literally means nothing
 void setup()
 {
   x=4;
