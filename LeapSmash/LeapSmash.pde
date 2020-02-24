@@ -8,8 +8,6 @@ void setup(){
   myPort = new Serial(this,portName, 9600);
   leap = new LeapMotion(this);
   //fullScreen();
-  println(Serial.list());
-  size(800,600);
  // println(Serial.list());
   size(1000,1000);
 }
