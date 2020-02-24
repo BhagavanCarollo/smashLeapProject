@@ -5,6 +5,7 @@ int a = BUTTON_B, b = BUTTON_A, x = BUTTON_Y, y = BUTTON_X;
 int reData[20] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 int reDataSize = 0;
 int flat = 0, fist = 1, sideThumb = 2;
+//this comment means nothing
 void setup() {
   Wire.begin(4);                // join i2c bus with address #4
   //  Wire.onReceive(receiveEvent);
