@@ -7,7 +7,7 @@ int reDataSize = 0;
 int flat = 0, fist = 1, sideThumb = 2;
 //this comment means nothing
 void setup() {
-  Wire.begin(4);                // join i2c bus with address #4
+  Wire.begin(9);                // join i2c bus with address #9
   //  Wire.onReceive(receiveEvent);
   Serial.begin(9600);           // start serial for output
   pinMode(LED_BUILTIN, OUTPUT);
@@ -47,19 +47,19 @@ void addToEnd(int things[], int thing) {
 //}
 boolean pressed = false;
 void sendInputs() {
-  while (1 <= Wire.available()) // loop through all but the last
+  while (Wire.available()) // loop through all but the last
   {
     char c = Wire.read();    // receive byte as an integer
     Serial.println(c);         // print the integer
     addToEnd(reData, c);
   }
+//  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+//  delay(1000);                       // wait for a second
+//  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+//  delay(1000);
   while ( reDataSize > 0 ) {
     int data = reData[0];
     removeFirst(reData);
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);                       // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);
     //    XInput.setButton(a,!pressed);
     //    pressed = !pressed;
     boolean isRight = (data / 54) == 1;
@@ -67,6 +67,10 @@ void sendInputs() {
     int x = data % 18 / 6 - 1;
     int y = data % 6 / 2 - 1;
     int z = data % 2;
+    if(data<0)
+    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+    else                     // wait for a second
+    digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
     if (x != 0 || y != 0 || z != 0) {
       if (gesture != flat || !isRight) XInput.setJoystick(JOY_LEFT, x * 32767, y * 32767);
       if (isRight) {
