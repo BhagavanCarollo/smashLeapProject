@@ -2,7 +2,7 @@ import de.voidplus.leapmotion.*;
 import processing.serial.*;
 LeapMotion leap;
 Serial myPort;
-
+boolean leftExists = false, rightExists = false;
 void setup(){
   String portName = Serial.list()[0];
   myPort = new Serial(this,portName, 9600);
@@ -42,7 +42,8 @@ void draw() {
       if(ly == 0) dataMail+=isYn;
       if(ly == 1) dataMail+=isYd;
       if(lz == 1) dataMail+=isZi;
-      sendData(dataMail);
+      sendData(dataMail+1);
+      leftExists = true;
     } else {
       if(gesture == flat) text("flat",2*width/3,height/2);
       else if(gesture == fist) text("fist",2*width/3,height/2);
@@ -58,10 +59,14 @@ void draw() {
       if(ry == 0) dataMail+=isYn;
       if(ry == 1) dataMail+=isYd;
       if(rz == 1) dataMail+=isZi;
-      sendData(dataMail);
+      sendData(dataMail+1);
+      rightExists = true;
     }
-    delay(60);
   }
+  if(!rightExists) {rx = 0; ry = 0; rz = 0;}
+  if(!leftExists)  {lx = 0; ly = 0; lz = 0;}
+  rightExists = false;
+  leftExists = false;
 }
 void sendData(int data) {
   myPort.write(data);

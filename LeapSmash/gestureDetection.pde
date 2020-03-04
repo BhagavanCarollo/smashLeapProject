@@ -1,6 +1,6 @@
 int flat = 0, fist = 1, sideThumb = 2/* sideways Thumbs up*/;
 int fcth = 13;//fingers curled threshold
-int toth = 550;//thumb out threshold
+int toth = 400;//thumb out threshold
 int getGesture(Hand hand) {
   boolean fingersCurled; //whether or not the have a fist, regardless of thumb pos
   fingersCurled = fingerTipAvg(hand).z-hand.getPosition().z<fcth;
