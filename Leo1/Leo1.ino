@@ -1,6 +1,6 @@
 #include <XInput.h>
 #include <Wire.h>
-int reData;
+int reData = 16, lastReData = 16;
 boolean pressed = false;
 int a = BUTTON_B, b = BUTTON_A, x = BUTTON_Y, y = BUTTON_X;
 int flat = 0, fist = 1, sideThumb = 2;
@@ -14,7 +14,7 @@ void setup()
 }
 void loop()
 {
-  delay(100);
+  delay(50);
 }
 void receiveEvent(int howMany){
   while(1 < Wire.available()) // loop through all but the last
@@ -24,15 +24,18 @@ void receiveEvent(int howMany){
   }
   int x = Wire.read();
   reData = x-1;
-  Serial.println(x);
-  if(x==5) {
-    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-    delay(1000);                       // wait for a second
-    digitalWrite(LED_BUILTIN, LOW);
-  }
+  Serial.println(reData);
+//  if(x==5) {
+//    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+//    delay(1000);                       // wait for a second
+//    digitalWrite(LED_BUILTIN, LOW);
+//  }
 //delay(1000);
+//  if(lastReData!=reData) 
   sendInputs();
+  lastReData = reData;
   reData = -1;
+  delay(50);
 }
 void sendInputs() {
     if( reData >= 0 ) {
@@ -43,7 +46,7 @@ void sendInputs() {
     boolean isRight = (reData / 54) == 1;
     int gesture = reData % 54 / 18;
     int x = reData % 18 / 6 - 1;
-    int y = reData % 6 / 2 - 1;
+    int y = -(reData % 6 / 2 - 1);
     int z = reData % 2;
 //    if(data<0)
 //    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)

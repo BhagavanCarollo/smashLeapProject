@@ -28,12 +28,12 @@ void draw() {
   for(Hand hand : leap.getHands()) {
     int gesture = getGesture(hand);
     if(hand.isLeft()) {
-      if(gesture == flat) text("flat",width/4,height/2);
-      else if(gesture == fist) text("fist",width/4,height/2);
-      else if(gesture == sideThumb) text("sideThumb",width/4,height/2);
-      text(hiVelL.x,width/4,height/2+50);
-      text(hiVelL.y,width/4,height/2+100);
-      text(hiVelL.z,width/4,height/2+150);
+      if(gesture == flat) text("Movement",width/4,height/2);
+      else if(gesture == fist) text("Sheild",width/4,height/2);
+      else if(gesture == sideThumb) text("Grab",width/4,height/2);
+      //text(hiVelL.x,width/4,height/2+50);
+      //text(hiVelL.y,width/4,height/2+100);
+      //text(hiVelL.z,width/4,height/2+150);
       int dataMail = 0;
       if(gesture == fist) dataMail+=isFist;
       if(gesture == sideThumb) dataMail+=isSideThumb;
@@ -45,12 +45,12 @@ void draw() {
       sendData(dataMail+1);
       leftExists = true;
     } else {
-      if(gesture == flat) text("flat",2*width/3,height/2);
-      else if(gesture == fist) text("fist",2*width/3,height/2);
-      else if(gesture == sideThumb) text("sideThumb",2*width/3,height/2);
-      text(hiVelR.x,2*width/3,height/2+50);
-      text(hiVelR.y,2*width/3,height/2+100);
-      text(hiVelR.z,2*width/3,height/2+150);
+      if(gesture == flat) text("Tilt",2*width/3,height/2);
+      else if(gesture == fist) text("Smash",2*width/3,height/2);
+      else if(gesture == sideThumb) text("Special",2*width/3,height/2);
+      //text(hiVelR.x,2*width/3,height/2+50);
+      //text(hiVelR.y,2*width/3,height/2+100);
+      //text(hiVelR.z,2*width/3,height/2+150);
       int dataMail = isRight;
       if(gesture == fist) dataMail+=isFist;
       if(gesture == sideThumb) dataMail+=isSideThumb;
@@ -63,8 +63,8 @@ void draw() {
       rightExists = true;
     }
   }
-  if(!rightExists) {rx = 0; ry = 0; rz = 0;}
-  if(!leftExists)  {lx = 0; ly = 0; lz = 0;}
+  if(!rightExists) {rx = 0; ry = 0; rz = 0; sendData(17+54);}
+  if(!leftExists)  {lx = 0; ly = 0; lz = 0;sendData(17);}
   rightExists = false;
   leftExists = false;
 }
