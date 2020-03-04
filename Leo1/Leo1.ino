@@ -24,7 +24,7 @@ void receiveEvent(int howMany){
   }
   int x = Wire.read();
   reData = x-1;
-  Serial.println(reData);
+//  Serial.println(reData);
 //  if(x==5) {
 //    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
 //    delay(1000);                       // wait for a second
@@ -64,9 +64,12 @@ void sendInputs() {
           XInput.setJoystick(JOY_LEFT, x * 32767, y * 32767);
           XInput.press(a);
           XInput.release(b);
+          XInput.setJoystick(JOY_RIGHT, 0,0);
         } else {
           XInput.setJoystick(JOY_LEFT, x * 32767, y * 32767);
           XInput.press(b);
+          XInput.release(a);
+          XInput.setJoystick(JOY_RIGHT, 0,0);
         }
       } else {
         if (gesture == flat) {
@@ -82,6 +85,16 @@ void sendInputs() {
           XInput.press(BUTTON_RB);
           XInput.setTrigger(TRIGGER_RIGHT, 0);
         }
+      }
+    } else {
+      if(isRight) {
+        XInput.release(a);
+        XInput.release(b);
+        XInput.setJoystick(JOY_RIGHT, 0,0);
+      } else {
+          XInput.setTrigger(TRIGGER_RIGHT, 0);
+          XInput.release(BUTTON_RB);
+          XInput.setJoystick(JOY_LEFT, 0,0);
       }
     }
   }

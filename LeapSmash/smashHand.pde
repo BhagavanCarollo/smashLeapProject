@@ -15,10 +15,12 @@ class smashHand {
     first = true;
   }
   boolean getInited() {
-    if(hand.getTimeVisible()>=3) {
+    if(hand.getTimeVisible()>=0.25) {
       if(inited == false) first = true;
       inited = true;
       isLeft = hand.isLeft();
+      if(isLeft) sendData(17);
+      else sendData(54+17);
     } else inited = false;
     return inited;
   }
@@ -35,7 +37,7 @@ class smashHand {
     vel.x = currPos.x-lastPos.x;
     vel.y = currPos.y-lastPos.y; 
     vel.z = currPos.z-lastPos.z;
-    if(hand.getTimeVisible()>3.5){
+    if(hand.getTimeVisible()>0.5){
       if(abs(vel.x)>abs(hiVel.x)) hiVel.x =  vel.x;
       if(abs(vel.y)>abs(hiVel.y)) hiVel.y =  vel.y;
       if(abs(vel.z)>abs(hiVel.z)) hiVel.z =  vel.z;
