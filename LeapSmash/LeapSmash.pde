@@ -69,6 +69,7 @@ void draw() {
   leftExists = false;
 }
 void sendData(int data) {
+  //if(data>=8) 
   myPort.write(data);
   println(data);
 }

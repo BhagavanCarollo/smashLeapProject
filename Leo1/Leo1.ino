@@ -23,19 +23,20 @@ void receiveEvent(int howMany){
 //  Serial.println(c);         // print the integer
   }
   int x = Wire.read();
-  reData = x-1;
-//  Serial.println(reData);
-//  if(x==5) {
-//    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-//    delay(1000);                       // wait for a second
-//    digitalWrite(LED_BUILTIN, LOW);
-//  }
-//delay(1000);
-//  if(lastReData!=reData) 
-  sendInputs();
-  lastReData = reData;
-  reData = -1;
-  delay(50);
+    reData = x-1;
+//    if(reData>8) reData--;
+  //  Serial.println(reData);
+  //  if(x==5) {
+  //    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  //    delay(1000);                       // wait for a second
+  //    digitalWrite(LED_BUILTIN, LOW);
+  //  }
+  //delay(1000);
+  //  if(lastReData!=reData) 
+    sendInputs();
+    lastReData = reData;
+    reData = -1;
+    delay(50);
 }
 void sendInputs() {
     if( reData >= 0 ) {
@@ -52,13 +53,14 @@ void sendInputs() {
 //    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
 //    else                     // wait for a second
 //    digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+if(reData != 16) Serial.println(reData);
     if (x != 0 || y != 0 || z != 0) {
       if (gesture != flat || !isRight) XInput.setJoystick(JOY_LEFT, x * 32767, y * 32767);
       if (isRight) {
         if (gesture == flat) {
-          XInput.setJoystick(JOY_RIGHT, x * 32767, y * 32767);
           if (x == 0 && y == 0) XInput.press(a);
           else XInput.release(a);
+          XInput.setJoystick(JOY_RIGHT, x * 32767, y * 32767);
           XInput.release(b);
         } else if (gesture == fist) {
           XInput.setJoystick(JOY_LEFT, x * 32767, y * 32767);
@@ -91,6 +93,7 @@ void sendInputs() {
         XInput.release(a);
         XInput.release(b);
         XInput.setJoystick(JOY_RIGHT, 0,0);
+        XInput.setJoystick(JOY_LEFT, 0,0);
       } else {
           XInput.setTrigger(TRIGGER_RIGHT, 0);
           XInput.release(BUTTON_RB);

@@ -58,14 +58,14 @@ class smashHand {
     } else {first = false; x = 0; y = 0; z = 0;}
     if(isLeft) {
       text("z "+z,width/4,height/2+300);
-      text("y "+y,width/4,height/2+250);
+      text("y "+(-y),width/4,height/2+250);
       text("x "+ x,width/4,height/2+200);
       lx = x;
       ly = y;
       lz = z;
     } else {
       text("z "+z,2*width/3,height/2+300);
-      text("y "+y,2*width/3,height/2+250);
+      text("y "+(-y),2*width/3,height/2+250);
       text("x "+x,2*width/3,height/2+200);
       rx = x;
       ry = y;
